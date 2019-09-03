@@ -215,6 +215,12 @@ const PostsQuery = {
       $push: { comments: commentId },
     },
   ),
+
+  getAppliedComments: slug => Post.aggregate([
+    { $match: { slug } },
+    { $lookup: join.comments },
+    { $project: { comments: 1 } },
+  ]),
 };
 
 module.exports = PostsQuery;

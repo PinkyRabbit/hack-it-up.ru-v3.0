@@ -15,9 +15,22 @@ const authentication = require('../utils/authentication');
 
 authentication.init();
 
+const env = process.env.NODE_ENV;
+
 module.exports = (app) => {
-  app.use(helmet());
-  compression(app);
+  if (env === 'development') {
+    app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Credentials', true);
+      res.header('Access-Control-Allow-Origin', req.headers.origin);
+      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+      next();
+    });
+  } else {
+    app.use(helmet());
+    compression(app);
+  }
+
   // view engine setup
   app.set('views', path.join(__dirname, '..', 'views'));
   app.set('view engine', 'twig');

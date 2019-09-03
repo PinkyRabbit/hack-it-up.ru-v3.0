@@ -141,6 +141,11 @@ const addComment = async (slug, comment) => {
   return article;
 };
 
+const getCommentsByArticleSlug = async (slug) => {
+  const [comments] = await Posts.getAppliedComments(slug);
+  return comments;
+};
+
 module.exports = {
   createNewArticle,
   getById,
@@ -154,4 +159,5 @@ module.exports = {
   getTagNews,
   deleteArticle,
   addComment,
+  getCommentsByArticleSlug,
 };

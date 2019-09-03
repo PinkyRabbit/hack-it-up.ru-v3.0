@@ -15,8 +15,8 @@ module.exports = (app) => {
   });
 
   app.use('/admin', adminRoutes);
-  app.use(unstablePath, unstableRoutes);
   app.use('/', publicRoutes);
+  app.use(unstablePath, unstableRoutes);
 
   if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1);

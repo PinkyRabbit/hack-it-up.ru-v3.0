@@ -404,6 +404,47 @@ span.sharer{
   width: auto!important;
 }
 
+.comment-list {
+  padding:0;
+  list-style:none;
+  max-height:200px;
+  overflow:auto;
+}
+
+.comment-list li {
+  margin:0;
+  margin-top:10px;
+}
+.commenter-image {
+  width: 50px;
+  margin-right: 15px;
+  height: 100%;
+  float:left;
+  display:table-cell;
+}
+.commenter-image img {
+  width:100%;
+  border-radius:50%;
+}
+.comment-text p {
+  display:table-cell;
+  margin:0;
+}
+.comment-meta {
+  font-size: 0.8em;
+}
+
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+
+.comment-moderation {
+  display: block!important;
+  font-size: 2em;
+}
+
 /*
  * Override Bootstrap's default container.
  */

@@ -2,6 +2,7 @@ const express = require('express');
 const { isEmpty } = require('lodash');
 
 const articleController = require('../controllers/article');
+
 const {
   validateSlugs,
   validateComment,
@@ -24,8 +25,12 @@ publicRouter
     validateSlugs(['articleSlug']),
     validateComment,
     newComment
-  );
-  // .get('/article/search', search)
+  )
+  .get(
+    '/comments/:articleSlug',
+    validateSlugs(['articleSlug']),
+    getAppliesComments
+  )
   // .post('/comment/:articleSlug', newComment)
   // .get('/login', loginPage)
   // .post('/login', authorization);
@@ -95,8 +100,10 @@ async function newComment(req, res) {
   return res.redirect('back');
 }
 
-async function search(req, res, next) {
-  return next();
+async function getAppliesComments(req, res) {
+  const { articleSlug } = req.params;
+  const comments = await articleController.getCommentsByArticleSlug(articleSlug);
+  return res.json(comments);
 }
 
 async function tagsList(req, res, next) {

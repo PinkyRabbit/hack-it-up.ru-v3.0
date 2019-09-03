@@ -21,6 +21,7 @@ const categoryFields = [
   'name',
   'description',
   'keywords',
+  'comments',
 ];
 
 module.exports = {
