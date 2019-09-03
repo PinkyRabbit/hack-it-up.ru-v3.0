@@ -1,0 +1,26 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  <div>
+    <form>
+      <div class="form-group">
+        <label for="title" class="control-label">Автор поста:</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          </div>
+          <input type="text" id="author" name="author" class="form-control" value="{{author}}" disabled="disabled">
+        </div>
+      </div>
+    </form>
+ 
+    <form method="post" action="/admin/comments/{{_id}}/edit">
+      <input type="hidden" value="{{ _csrf }}" name="_csrf">
+      <div class="form-group">
+        <label for="body">Текст сообщения:</label>
+        <textarea id="body" name="body" class="form-control">{{body}}</textarea>
+      </div>
+      <button class="btn btn-danger" type="submit">Отправить</button>
+    </form>
+  </div>
+{% endblock %}

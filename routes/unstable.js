@@ -59,6 +59,13 @@ unstableRouter
           sidebar: true,
           google: true,
           _csrf: req.csrfToken(),
+          scripts: {
+            custom: [
+              '/js/comments/runtime~main.be600aad.js',
+              '/js/comments/2.dd8d1b3e.chunk.js',
+              '/js/comments/main.64809c63.chunk.js',
+            ],
+          },
         });
       default:
         return next();

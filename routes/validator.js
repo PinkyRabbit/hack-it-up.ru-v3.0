@@ -130,6 +130,22 @@ const validateTag = (req, res, next) => {
   return next();
 };
 
+const validateCommentByAdmin = (req, res, next) => {
+  const { body } = req.body;
+  const { error, value } = Joi.validate({ body }, {
+    body: Joi.string().min(2).required(),
+  });
+  if (error) {
+    req.flash('success', 'Пустое значение в поле body');
+
+    res.status(400);
+    return res.redirect('back');
+  }
+  req.validatedBody = value;
+
+  return next();
+};
+
 const validateComment = (req, res, next) => {
   const { _csrf, ...body } = req.body;
   const { error, value } = Joi.validate(body, validateCommentSchema);
@@ -152,4 +168,5 @@ module.exports = {
   validateCategory,
   validateTag,
   validateComment,
+  validateCommentByAdmin,
 };

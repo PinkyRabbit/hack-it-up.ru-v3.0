@@ -102,8 +102,15 @@ async function newComment(req, res) {
 
 async function getAppliesComments(req, res) {
   const { articleSlug } = req.params;
-  const comments = await articleController.getCommentsByArticleSlug(articleSlug);
-  return res.json(comments);
+  let { comments } = await articleController.getCommentsByArticleSlug(articleSlug);
+  if (!req.user) {
+    comments = comments.map((comment) => {
+      const { _id, ...lean } = comment;
+      return lean;
+    });
+  }
+
+  return res.json({ comments });
 }
 
 async function tagsList(req, res, next) {

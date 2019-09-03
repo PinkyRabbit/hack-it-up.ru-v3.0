@@ -5,11 +5,11 @@ const { isAuthenticated } = require('../../utils/authentication');
 const adminArticleRoute = require('./article');
 const adminCategoryRoute = require('./category');
 const adminTagsRoute = require('./tags');
+const adminCommentRoute = require('./comment');
 const { generator } = require('../../utils/helpers');
 const { getUnpublished } = require('../../db/post');
 const { getAllTags } = require('../../db/tag');
 const { getAllCategories } = require('../../db/category');
-// const adminCommentRoute = require('./comment');
 
 const adminRouter = express.Router();
 
@@ -19,8 +19,8 @@ adminRouter
   .use('/article', adminArticleRoute)
   .use('/categories', adminCategoryRoute)
   .use('/tags', adminTagsRoute)
+  .use('/comments', adminCommentRoute)
   .get('/generate', generateData);
-  // .use('/comments', adminCommentRoute);
 
 function addSeoAdmin(req, res, next) {
   res.locals.google = false;

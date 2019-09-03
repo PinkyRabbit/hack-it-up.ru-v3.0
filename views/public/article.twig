@@ -33,7 +33,7 @@
           <div class="input-group-addon">
             <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
           </div>
-          <input type="text" id="author" name="author" class="form-control" placeholder="Ваш email">
+          <input type="text" id="author" name="author" class="form-control" placeholder="Ваш псевдоним">
         </div>
       </div>
 
@@ -47,19 +47,7 @@
       <button class="btn btn-danger" type="submit">Отправить</button>
     </form>
 
-    {% if comments %}
-      <table class="table table-striped" style="margin-top: 20px">
-        {% for comment in comments %}
-          <tr>
-            <td>
-              {{ comment.author }}<br />
-              {{ comment.date }}
-            </td>
-            <td>{{ comment.body }}</td>
-          </tr>
-        {% endfor %}
-      </table>
-    {% endif %}
+    <div id="comments"></div>
   {% endif %}
 {% endblock %}
 

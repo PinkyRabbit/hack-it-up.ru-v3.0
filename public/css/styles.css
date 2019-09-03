@@ -405,10 +405,9 @@ span.sharer{
 }
 
 .comment-list {
+  margin-top: 30px;
   padding:0;
   list-style:none;
-  max-height:200px;
-  overflow:auto;
 }
 
 .comment-list li {
@@ -433,16 +432,17 @@ span.sharer{
 .comment-meta {
   font-size: 0.8em;
 }
-
 .sub-text {
     color:#aaa;
     font-family:verdana;
     font-size:11px;
 }
-
 .comment-moderation {
   display: block!important;
-  font-size: 2em;
+  font-size: 1.2em;
+}
+.comment-moderation span{
+  margin: 10px;
 }
 
 /*
