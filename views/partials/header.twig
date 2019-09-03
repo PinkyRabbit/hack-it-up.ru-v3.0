@@ -1,0 +1,11 @@
+{% macro header(postimage, title) %}
+  <header>
+    <div>
+      {% if postimage %}
+        <img src="/images/{{postimage}}" alt="{{title}}" class="logo">
+      {% else %}
+        <img src="/images/standart/no-image.jpg" alt="hack-it-up" class="logo">
+      {% endif %}
+    </div>
+  </header>
+{% endmacro %}

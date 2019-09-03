@@ -1,0 +1,39 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  {% if news %}
+    <!-- posts -->
+    {% for post in news %}
+      <div class="post">
+        <h2>
+          <a href="/{{post.category.slug}}/{{post.slug}}" title="{{post.h1}}">
+            <i class="fa fa-github" aria-hidden="true"></i> {{post.h1}}
+          </a>
+        </h2>
+        <a href="/{{post.category.slug}}/{{post.slug}}" rel="nofollow">
+          <img class="img-responsive img-thumbnail" src="/images/{{post.postimage}}" alt="{{post.title}}">
+        </a>
+        <p class="description">{{post.description}}</p>
+        <ol class="breadcrumb">
+          <li>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ post.updatedAt }}
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> <a href="/{{post.category.slug}}" title="{{post.category.name}}">{{ post.category.name }}</a>
+          </li>
+        </ol>
+      </div>
+    {% endfor %}
+
+    <!-- pagination -->
+    {% if pagination %}
+      {{ pagination }}
+    {% endif %}
+  {% else %}
+    <h2>В этом разделе сайта пока что нет постов...</h2>
+    <p>Но обязательно появятся =)</p>
+  {% endif %}
+  <script>
+    $('.post h2').each(function(){ if($(this).height()<65) $(this).css({'padding-left':'55px','padding-top':'10px'});}); 
+  </script>
+{% endblock %}

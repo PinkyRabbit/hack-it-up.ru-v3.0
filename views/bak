@@ -1,0 +1,104 @@
+{% macro navbar(menucats) %}
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <a href="/" title="На главную" class="navbar-brand">
+      <img src="/images/logo-min.jpg", alt="logo min">
+    </a>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        {% if menucats %}
+          <li class="dropdown">
+              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                По категориям <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu cats-menu">
+                {% for menucat in menucats %}
+                  <li>
+                    <a href="/cat/#{menucat.url}" title="#{menucat.name}">
+                      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> #{menucat.name}
+                    </a>
+                  </li>
+                {% endfor %}
+                <li>
+                  <a href="/short", title="Перейти в заметки">
+                    <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 
+                    Заметки
+                  </a>
+                </li>
+              </ul>
+          </li>
+        {% endif %}    
+        <li>
+          <a href="/refers",title="Мои рекомендации">Я рекомендую</a> 
+        </li>
+        <li>
+          <a href="/flash" title="FLASH">FLASH</a>
+        </li>
+        <li>
+          <a href="/contact" title="Контакты">Контакты</a>() 
+        </li>
+      </ul>
+      {# if authxyz
+        ul.nav.navbar-nav.navbar-right
+            li(class="dropdown")
+              a.dropdown-toggle(href="#",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false")
+                | Админко 
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href="/admin") 
+                    span.glyphicon.glyphicon-hourglass(aria-hidden="true")
+                    |  История админки
+                li
+                  a(href="/admin/images", target="_blanc") 
+                    span.glyphicon.glyphicon-picture(aria-hidden="true")
+                    |  Управление изображениями
+                li
+                  a(href="/refers/edit") 
+                    span.glyphicon.glyphicon-shopping-cart(aria-hidden="true")
+                    |  Управление рекомендациями
+                li
+                  a(href="/admin/event") 
+                    span.glyphicon.glyphicon-book(aria-hidden="true")
+                    |  Статические страницы
+                li
+                  a(href="/admin/article") 
+                    span.glyphicon.glyphicon-certificate(aria-hidden="true")
+                    |  Добавить статью
+                li
+                  a(href="/unpublished") 
+                    span.glyphicon.glyphicon-volume-off(aria-hidden="true")
+                    |  Неопубликованные статьи  
+                li
+                  a(href="/admin/short") 
+                    span.glyphicon.glyphicon-paperclip(aria-hidden="true")
+                    |  Добавить шорт
+                li.divider(role="separator")
+                  li
+                    a(href="/admin/tags") Управление тегами
+                  li
+                    a(href="/admin/cat") Управление категориями
+                li.divider(role="separator")
+                li
+                  a(href="/admin/deletepost")
+                    span.glyphicon.glyphicon-trash(aria-hidden="true")
+                    |  Удалить статью
+                li
+                  a(href="/admin/newuser",title="Регистрация")
+                    span.glyphicon.glyphicon-user(aria-hidden="true")
+                    |  Зарегистрировать пользователя
+            li
+              a(href="/admin/logout",title="Выход")
+                span.glyphicon.glyphicon-off(aria-hidden="true")
+                |  Выйти #}
+    </div>
+  </nav>
+{% endmacro %}
+

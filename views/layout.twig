@@ -1,0 +1,112 @@
+{% from 'partials/navbar.twig' import navbar %}
+{% from 'partials/header.twig' import header %}
+{% from 'partials/footer.twig' import footer %}
+{% from 'partials/meta.twig' import meta %}
+{% from 'partials/pagedebug.twig' import pagedebug %}
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if description %}
+      <meta name="description" content="{{ description }}">
+    {% endif %}
+    {% if keywords %}
+      <meta name="keywords" content="{{ keywords }}">
+    {% endif %}
+
+    <title>{{ title ? 'hack-it-up.ru — ' ~ title : 'hack-it-up.ru *_*' }}</title>
+
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/js/jquery-1.12.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      {{ navbar(menucats, user, development, isAdmin) }}
+      {{ header(postimage) }}
+      {% block body %}{% endblock %}
+      <h1>{{ h1 ? h1 : 'Happy Hacking *_*' }}</h1>
+      <div class="content" id="main">
+        <div class="row">
+          {% if sidebar %}
+            <div class="col-xs-12 col-sm-9" id="content">
+              {% if category is not defined %}
+                {{ pagedebug(title, h1, description, keywords) }}
+              {% else %}
+                {{ meta(_id, tags, category, isAdmin) }}
+              {% endif %}
+              {% if messages is defined %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.type }}" role="alert" style="margin-bottom: 10px">{{ message.msg }}</div>
+                {% endfor %}
+              {% endif %}
+              {% block bodyblock %}{% endblock %}
+            </div>
+            <aside class="col-xs-12 col-sm-3">
+              <!-- subscribe -->
+              <h4>Подпишись:</h4>
+              <form method="post" action="/subscribe" id="subform">
+                <input type="hidden" value={{ csrf }} name="_csrf">
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" id="subemail" placeholder="Ваш email...">
+                </div>
+              </form>
+              <!-- subscribe -->
+
+              <!-- tags -->
+              <div class="list-group">
+                <h4>Случайные теги:</h4>
+                {% for atag in asidetags %}
+                  <a href="/tag/{{ atag.url }}" class="list-group-item">{{ atag.name }}</a>
+                {% endfor %}
+              </div>
+              <!-- /tags -->
+
+              <!-- twitter -->
+              <a class="twitter-timeline"
+                data-tweet-limit="10"
+                href="https://twitter.com/pinkya_rabbit"
+                >
+                Tweets by @pinkya_rabbit
+                </a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <!-- /twitter -->
+            </aside>
+          {% else %}
+            <div class="col-xs-12" id="content">
+                {% if messages is defined %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.type }}" role="alert" style="margin-bottom: 10px">{{ message.msg }}</div>
+                    {% endfor %}
+                {% endif %}
+                {{ pagedebug(title, h1, description, keywords) }}
+                {% block bodyblock %}{% endblock %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {{ footer() }}
+    <!-- scripts -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    {% if scripts.custom %}
+      <script src="{{ scripts.custom }}"></script>
+    {% endif %}
+
+    {% if scripts.google %}
+      <script src="{{ scripts.google }}"></script>
+    {% endif %}
+  </body>
+</html>

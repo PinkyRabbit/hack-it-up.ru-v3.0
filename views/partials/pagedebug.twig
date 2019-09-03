@@ -1,0 +1,25 @@
+{% macro pagedebug(title, h1, description, keywords) %}
+  <section>
+    {% if title == '' or title is not defined %}
+      <div class="alert alert-info" role="alert" style="margin-bottom: 10px">
+        У страницы нет тайтла!
+      </div>
+    {% endif %}
+    {% if h1 == '' or title is not defined %}
+      <div class="alert alert-info" role="alert" style="margin-bottom: 10px">
+        У страницы нет h1!
+      </div>
+    {% endif %}
+    {% if description == '' or title is not defined %}
+      <div class="alert alert-info" role="alert" style="margin-bottom: 10px">
+        У страницы нет описания!
+      </div>
+    {% endif %}
+    {% if keywords == '' or title is not defined %}
+      <div class="alert alert-info" role="alert" style="margin-bottom: 10px">
+        Не заданы ключевые слова для страницы!
+      </div>
+    {% endif %}
+  </section>
+{% endmacro %}
+

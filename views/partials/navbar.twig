@@ -1,0 +1,54 @@
+{% macro navbar(menucats, user, development, isAdmin) %}
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" title="На главную" class="navbar-brand">
+        <img src="/images/logo-min.jpg" alt="logo min">
+      </a>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav">
+        {% if menucats %}
+          <li class="dropdown">
+              <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                По категориям <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu cats-menu">
+                {% for menucat in menucats %}
+                  <li>
+                    <a href="/category/{{menucat.url}}" title="{{menucat.name}}">
+                      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {{menucat.name}}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+          </li>
+        {% endif %}
+        <li>
+          <a href="/about-me",title="Обо мне">Обо мне</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <input id="search" placeholder="Умный поиск"/>
+        </li>
+        <div class="list-group" id="searchmenu"></div>
+        {% if isAdmin %}
+        <li>
+          <a href="/admin/article/new"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+        </li>
+        <li>
+          <a href="/admin"><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span></a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+{% endmacro %}
+

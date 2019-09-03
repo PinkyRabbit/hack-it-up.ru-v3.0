@@ -1,0 +1,28 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <h2>Привет!</h2>
+        <em>Мы с тобой – люди Темной Стороны, а там, откуда мы пришли, мы всего лишь гости, странные незнакомцы, которых кое-как терпят…</em> 
+        <hr />
+        <form method="post" action="/login">
+          <input type="hidden" value={{ csrf }} name="_csrf">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LfIQT4UAAAAAAEqLelVPTUASOC9Cdz4s_cr1ir8"></div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg">Войти</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

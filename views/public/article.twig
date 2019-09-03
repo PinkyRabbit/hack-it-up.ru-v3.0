@@ -1,0 +1,65 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  {% if isAdmin and isPublished == false %}<!-- info that article is not published-->
+    <div class="alert alert-info" role="alert">
+    <form action="/admin/article/{{_id}}/view?back=true&_csrf={{_csrf}}" method="post">
+      <textarea style="display:none" name="body">{{ body }}</textarea>
+      <input type="hidden" name="title" value="{{ title }}">
+      <input type="hidden" name="h1" value="{{ h1 }}">
+      <input type="hidden" name="description" value="{{ description }}">
+      <input type="hidden" name="keywords" value="{{ keywords }}">
+      <input type="hidden" name="postimage" value="{{ postimage }}">
+      <input type="hidden" name="slug" value="{{ slug }}">
+      <input type="hidden" name="category" value="{{ category }}">
+      {% for tag in tags %}
+        <input type="hidden" name="tags" value="{{ tag.name }}">
+      {% endfor %}
+      <strong>Внимание! Это превью!</strong> Статья пока что не опубликована. Для того чтобы её опубликовать нажмите <input type="submit" value="вот тут" />
+    </form>
+    </div>
+  {% endif %}
+  <hr>
+  <article>{{ body }}</article>
+
+  {% if isPublished %}<!-- comments -->
+    <hr>
+    <h3>Прокомментировать:</h3>
+    <form method="post" action="/comment/{{slug}}">
+      <input type="hidden" value="{{ _csrf }}" name="_csrf">
+      <div class="form-group">
+        <label for="title" class="control-label">Представьтесь, пожалуйста:</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          </div>
+          <input type="text" id="author" name="author" class="form-control" placeholder="Ваш email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="body">Ваше сообщение:</label>
+        <textarea id="body" name="body" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="g-recaptcha" data-sitekey="6LfIQT4UAAAAAAEqLelVPTUASOC9Cdz4s_cr1ir8"></div>
+      </div>
+      <button class="btn btn-danger" type="submit">Отправить</button>
+    </form>
+
+    {% if comments %}
+      <table class="table table-striped" style="margin-top: 20px">
+        {% for comment in comments %}
+          <tr>
+            <td>
+              {{ comment.author }}<br />
+              {{ comment.date }}
+            </td>
+            <td>{{ comment.body }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+

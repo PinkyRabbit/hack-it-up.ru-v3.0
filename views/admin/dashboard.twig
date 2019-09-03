@@ -1,0 +1,63 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  {% if posts %}
+    <h3>Неопубликованные материалы</h3>
+    <ul class="list-group">
+    {% for post in posts %}
+      <li class="list-group-item">
+        {{ post.createdAt }}
+        <a href="/admin/article/{{ post._id }}/edit">{{ post.h1 }}</a>
+        <a href="/admin/article/{{ post._id }}/delete" onclick="return confirm('Вы точно хотите удалить эту статью?')" class="delete-x">X</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <h3>Неопубликованных материалов нет...</h3>
+  {% endif %}
+
+  {% if categories %}
+    <h3>Категории</h3>
+    {% for index, category in categories %}
+      {% if index != 0 %}<hr />{% endif %}
+      <form action="/admin/categories/{{category._id}}/update" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf}}" />
+        <div class="form-group">
+          <label for="catname{{index}}">Имя категории</label>
+          <input type="text" id="catname{{index}}" name="name" value="{{category.name}}" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="catdescription{{index}}">Краткое описание</label>
+          <textarea id="catdescription{{index}}" name="description" class="form-control" rows="3">{{category.description}}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="catkeywords{{index}}">Ключики</label>
+          <input type="text" id="catkeywords{{index}}" name="keywords" value="{{category.keywords}}" class="form-control" />
+        </div>
+        <a href="/admin/categories/{{category._id}}/delete" onclick="return confirm('Вы точно хотите удалить эту категорию?')" class="btn btn-default catdel">Удалить</a>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+      </form>
+    {% endfor %}
+  {% else %}
+    <h3>Созданных категорий нет...</h3>
+  {% endif %}
+
+  {% if tags %}
+    <h3>Теги</h3>
+    {% for tag in tags %}
+      <form action="/admin/tags/{{tag._id}}" method="post">
+        <div class="input-group">
+          <input type="hidden" name="_csrf" value="{{_csrf}}" />
+          <input type="text" name="name" class="form-control taginput" value="{{tag.name}}">
+          <input type="text" name="slug" class="form-control taginput" value="{{tag.slug}}" disabled="disabled">
+          <div class="input-group-btn" style="float: left">
+            <a href="/admin/tags/{{tag._id}}/delete" onclick="return confirm('Вы точно хотите удалить этот тег?')" class="btn btn-default catdel">Удалить</a>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+          </div>
+        </div>
+      </form>
+    {% endfor %}
+  {% else %}
+    <h3>Созданных тегов нет...</h3>
+  {% endif %}
+{% endblock %}

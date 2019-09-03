@@ -1,0 +1,66 @@
+{% extends '../layout.twig' %}
+
+{% block bodyblock %}
+  <p>Такой страницы не существует</p>
+
+  <p>Если ты читаешь это сообщение, то ты попал на страницу, которая не существует. Давай разберёмся почему это могло произойти.</p> 
+
+  {% if isAdmin %}
+    <div class="alert alert-success" role="alert">
+      <p>Status: <strong>{{ error.status }}</strong></p>
+      <p>{{ error.message }}</p>
+    </div>
+    {% if error.stack %}
+      <pre>{{ error.stack }}</pre>
+    {% endif %}
+  {% endif %}
+
+  <h2>Возможные причины:</h2>
+  <ul>
+    <li>Вы вводили ссылку на страницу и сделали ошибку</li>
+    <li>Страница была перемещена на другой адрес или удалена</li>
+    <li>На сайте есть какая-то поломанная ссылка в меню</li>
+    <li>Произошёл технический сбой и вам отдало ошибочный адрес</li>
+  </ul>
+
+  <h2>Решение:</h2>
+  <p>Не стоит переживать! Просто <a href="/" title="На главную">нажми сюда и перейди на главную</a></p>
+  <hr>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <strong>Вы можете очень помочь сайту</strong>
+    <br>
+    <em>Опишите, на что вы нажали и что сделали перед тем, как сюда попали. Спасибо!</em>
+  </div>
+
+  <form method="post" action="/send-err">
+    <input type="hidden" value={{ csrf }} name="_csrf">
+    <div class="form-group">
+      <label for="title" class="control-label">Представьтесь, пожалуйста:</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </div>
+        <input type="text" placeholder="Ваше имя" id="name" name="name" autofocus="on" class="form-control">
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="" class="control-label" for="email">Ваш email (строго конфиденциально)</label>
+      <div class="input-group">
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+        </div>
+        <input type="text" placeholder="Не обязательно" id="email" name="email" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="body">Своими словами опишите что произошло:</label>
+      <textarea id="body" name="body" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <div class="g-recaptcha" data-sitekey="6LfIQT4UAAAAAAEqLelVPTUASOC9Cdz4s_cr1ir8"></div>
+    </div>
+    <button class="btn btn-danger" type="submit">Отправить</button>
+  </form>
+{% endblock %}

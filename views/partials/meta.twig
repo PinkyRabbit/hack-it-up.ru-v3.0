@@ -1,0 +1,21 @@
+{% macro meta(id, tags, category, isAdmin) %}
+  <div class="meta-post">
+    <span class="pull-right">
+      {% for tag in tags %}
+        <a href="/tag/{{tag.slug}}" title="В раздел про {{tag.name}}" data-toggle="tooltip" data-placement="bottom">
+          <span class="label label-warning"></span> {{tag.name}}
+        </a>
+      {% endfor %}
+      {% if isAdmin %}
+        <a href="/admin/article/{{id}}/edit/" data-toggle="tooltip" data-placement="top" title="Править">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+      {% endif %}
+    </span>
+    <span class="catbadge">
+      <a href="{{ category.slug ? "/" ~ category.slug : "#"}}" title="Смотреть категорию {{category.name}}">{{ category.name }}</a>
+      <span></span>
+    </span>
+  </div>
+  <div class="clearfix"></div>
+{% endmacro %}

@@ -1,0 +1,67 @@
+{
+  "name": "hack-it-up",
+  "version": "3.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www",
+    "nodemon": "NODE_ENV=development nodemon ./bin/www",
+    "vue": "NODE_ENV=development VUE=development nodemon ./bin/www",
+    "lint": "node_modules/.bin/eslint ./app/**/*.js",
+    "seed": "NODE_ENV=development node ./db/init"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "ignore": [],
+    "linters": {
+      "./app/**/*.js": "eslint"
+    },
+    "relative": true
+  },
+  "dependencies": {
+    "@log4js-node/smtp": "^1.1.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "csurf": "^1.10.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "helmet": "^3.18.0",
+    "http-errors": "^1.7.2",
+    "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
+    "lodash": "^4.17.15",
+    "log4js": "^4.3.1",
+    "markdown": "^0.5.0",
+    "memorystore": "^1.6.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.24.0",
+    "monk": "^7.0.0",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "nodemailer": "^6.2.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.5.0",
+    "sharp": "^0.23.0",
+    "transliteration.cyr": "^1.0.5",
+    "twig": "^1.13.3",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "5.3.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "mocha": "^6.1.4",
+    "supertest": "^4.0.2"
+  }
+}
