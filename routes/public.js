@@ -2,10 +2,12 @@ const express = require('express');
 const { isEmpty } = require('lodash');
 
 const articleController = require('../controllers/article');
+const authorization = require('./auth');
 
 const {
   validateSlugs,
   validateComment,
+  validateLogin,
 } = require('./validator');
 const { getAboutMePage } = require('../services/markdown');
 
@@ -31,9 +33,8 @@ publicRouter
     validateSlugs(['articleSlug']),
     getAppliesComments
   )
-  // .post('/comment/:articleSlug', newComment)
-  // .get('/login', loginPage)
-  // .post('/login', authorization);
+  .get('/login', loginPage)
+  .post('/login', validateLogin, authorization);
 
 async function csrf(req, res) {
   const token = req.csrfToken();
@@ -117,14 +118,22 @@ async function tagsList(req, res, next) {
   return next();
 }
 
-
-
-async function loginPage(req, res, next) {
-  return next();
-}
-
-async function authorization(req, res, next) {
-  return next();
+async function loginPage(req, res) {
+  return res.render('public/login', {
+    google: false,
+    sidebar: false,
+    title: 'Вход...',
+    h1: 'Дорога в эхо',
+    keywords: 'login',
+    postimage: 'standart/login.jpg',
+    description: 'Страничка входа =) Только нафиг она вам сдалась-то?',
+    scripts: {
+      costume: [
+        'https://www.google.com/recaptcha/api.js'
+      ],
+    },
+    _csrf: req.csrfToken(),
+  });
 }
 
 module.exports = publicRouter;

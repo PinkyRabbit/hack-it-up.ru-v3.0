@@ -35,6 +35,11 @@ const validateCommentSchema = {
   body: Joi.string().min(2).max(250).required(),
 };
 
+const validateLoginSchema = {
+  email: Joi.string().email().required(),
+  password: Joi.string().regex(/^[a-z0-9-]+$/).required(),
+};
+
 const validateSlugs = (slugsArray) => {
   const slugsSchema = getSlugsSchema(slugsArray);
   return (req, res, next) => {
@@ -159,6 +164,18 @@ const validateComment = (req, res, next) => {
   return next();
 };
 
+const validateLogin = (req, res, next) => {
+  const { _csrf, ...body } = req.body;
+  const { error, value } = Joi.validate(body, validateLoginSchema);
+  if (error) {
+    res.status(400);
+    return res.redirect('back');
+  }
+  req.validatedBody = value;
+
+  return next();
+};
+
 module.exports = {
   validateId,
   validateArticle,
@@ -169,4 +186,5 @@ module.exports = {
   validateTag,
   validateComment,
   validateCommentByAdmin,
+  validateLogin,
 };

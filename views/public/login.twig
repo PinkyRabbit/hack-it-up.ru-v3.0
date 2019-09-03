@@ -8,7 +8,7 @@
         <em>Мы с тобой – люди Темной Стороны, а там, откуда мы пришли, мы всего лишь гости, странные незнакомцы, которых кое-как терпят…</em> 
         <hr />
         <form method="post" action="/login">
-          <input type="hidden" value={{ csrf }} name="_csrf">
+          <input type="hidden" value={{ _csrf }} name="_csrf">
           <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" name="email" class="form-control" id="email" placeholder="Email">
