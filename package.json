@@ -61,7 +61,7 @@
     "eslint-plugin-import": "^2.18.2",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "supertest": "^4.0.2"
   }
 }
