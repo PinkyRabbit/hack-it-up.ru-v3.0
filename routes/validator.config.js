@@ -3,6 +3,7 @@ const reservedRoutes = [
   'admin',
   'tag',
   'about-me',
+  'logout',
 ];
 
 const articleFields = [

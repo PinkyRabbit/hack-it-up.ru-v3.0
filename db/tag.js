@@ -1,7 +1,7 @@
 const { Tag } = require('.');
 
 const TagQuery = {
-  getAll: () => Tag.find({}),
+  getAll: (options = {}) => Tag.find({}, options),
 
   findById: _id => Tag.findOne({ _id }),
 
@@ -19,6 +19,8 @@ const TagQuery = {
   update: (_id, update) => Tag.update({ _id }, { $set: update }),
 
   delete: _id => Tag.remove({ _id }),
+
+  getFive: () => Tag.aggregate([{ $sample: { size: 5 } }]),
 };
 
 module.exports = TagQuery;

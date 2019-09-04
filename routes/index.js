@@ -3,14 +3,18 @@ const createError  = require('http-errors');
 const adminRoutes = require('./admin');
 const publicRoutes = require('./public');
 const unstableRoutes = require('./unstable');
+const { getCategoriesList } = require('../controllers/categories');
+const { getFiveRandom } = require('../controllers/tags');
 const errorHandler = require('../services/errors');
 const { reservedRoutes } = require('./validator.config');
 
 const unstablePath = new RegExp(`/((?!${reservedRoutes.join('|')}).)*`);
 
 module.exports = (app) => {
-  app.get('*', (req, res, next) => {
+  app.get('*', async (req, res, next) => {
     res.locals.isAdmin = process.env.NODE_ENV === 'development' || req.user;
+    res.locals.categories = await getCategoriesList();
+    res.locals.fiveRandomTags = await getFiveRandom();
     return next();
   });
 

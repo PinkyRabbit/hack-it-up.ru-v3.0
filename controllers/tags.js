@@ -42,9 +42,15 @@ const deleteTag = async (_id) => {
   return tag;
 };
 
+const getFiveRandom = async () => {
+  const tags = await Tag.getFive();
+  return tags;
+};
+
 module.exports = {
   getAlltags,
   createTag,
   updateTag,
   deleteTag,
+  getFiveRandom,
 };

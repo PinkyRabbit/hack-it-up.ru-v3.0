@@ -34,7 +34,7 @@
   </head>
   <body>
     <div class="container">
-      {{ navbar(menucats, user, development, isAdmin) }}
+      {{ navbar(categories, user, development, isAdmin) }}
       {{ header(postimage) }}
       {% block body %}{% endblock %}
       <h1>{{ h1 ? h1 : 'Happy Hacking *_*' }}</h1>
@@ -68,8 +68,8 @@
               <!-- tags -->
               <div class="list-group">
                 <h4>Случайные теги:</h4>
-                {% for atag in asidetags %}
-                  <a href="/tag/{{ atag.url }}" class="list-group-item">{{ atag.name }}</a>
+                {% for tag in fiveRandomTags %}
+                  <a href="/tag/{{ tag.slug }}" class="list-group-item" title="{{ tag.name }}">{{ tag.name }}</a>
                 {% endfor %}
               </div>
               <!-- /tags -->

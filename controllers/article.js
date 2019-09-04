@@ -107,9 +107,10 @@ const getCategoryNews = async (slug, { page = 1 }) => {
   return { news, pagination, seo };
 };
 
-const getTagNews = async ({ slug, page = 1 }) => {
+const getTagNews = async (slug, { page = 1 }) => {
   const { news, pagination } = await getBaseForNews(page, { 'tags.slug': slug });
   const tag = await Tag.findBySlug(slug);
+
   let seo;
   if (tag) {
     seo = {
@@ -125,7 +126,6 @@ const getTagNews = async ({ slug, page = 1 }) => {
       seo.description = `${seo.description} Cтраница ${page}.`;
     }
   }
-
 
   return { news, pagination, seo };
 };

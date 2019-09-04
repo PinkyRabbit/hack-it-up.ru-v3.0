@@ -34,9 +34,20 @@ const deleteCategory = async (categoryId) => {
   return category;
 };
 
+const getCategoriesList = async () => {
+  const categories = await Categories.getAll();
+  const sanitized = categories.map(category => ({
+    name: category.name,
+    slug: category.slug,
+  }));
+
+  return sanitized;
+}
+
 module.exports = {
   getAllCategories,
   createOrUpdateNameAndSlugOfCategory,
   updateCategory,
   deleteCategory,
+  getCategoriesList,
 };

@@ -114,10 +114,6 @@ async function getAppliesComments(req, res) {
   return res.json({ comments });
 }
 
-async function tagsList(req, res, next) {
-  return next();
-}
-
 async function loginPage(req, res) {
   return res.render('public/login', {
     google: false,

@@ -1,4 +1,4 @@
-{% macro navbar(menucats, user, development, isAdmin) %}
+{% macro navbar(categories, user, development, isAdmin) %}
   <nav class="navbar navbar-default navbar-static-top">
     <div class="navbar-header">
       <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -13,16 +13,16 @@
     </div>
     <div class="navbar-collapse collapse" id="navbar">
       <ul class="nav navbar-nav">
-        {% if menucats %}
+        {% if categories %}
           <li class="dropdown">
               <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
                 По категориям <span class="caret"></span>
               </a>
               <ul class="dropdown-menu cats-menu">
-                {% for menucat in menucats %}
+                {% for category in categories %}
                   <li>
-                    <a href="/category/{{menucat.url}}" title="{{menucat.name}}">
-                      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {{menucat.name}}
+                    <a href="/{{category.slug}}" title="{{category.name}}">
+                      <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {{category.name}}
                     </a>
                   </li>
                 {% endfor %}
@@ -40,6 +40,9 @@
         </li>
         <div class="list-group" id="searchmenu"></div>
         {% if isAdmin %}
+        <li>
+          <a href="/logout" onclick="return confirm('Выходим?')" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+        </li>
         <li>
           <a href="/admin/article/new"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
         </li>
