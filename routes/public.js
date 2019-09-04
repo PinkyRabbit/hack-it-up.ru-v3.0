@@ -34,7 +34,8 @@ publicRouter
     getAppliesComments
   )
   .get('/login', loginPage)
-  .post('/login', validateLogin, authorization);
+  .post('/login', validateLogin, authorization)
+  .get('/logout', logout);
 
 async function csrf(req, res) {
   const token = req.csrfToken();
@@ -130,6 +131,12 @@ async function loginPage(req, res) {
     },
     _csrf: req.csrfToken(),
   });
+}
+
+async function logout(req, res) {
+  req.logout();
+  req.flash('info', 'Вы вышли. Заходите ещё!');
+  res.redirect('/');
 }
 
 module.exports = publicRouter;

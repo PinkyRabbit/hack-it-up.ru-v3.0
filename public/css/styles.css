@@ -71,14 +71,6 @@ a:focus{
 #content a:hover{
   color: #ff409a;
 }
-.alert-top ul{
-  background: #cfffa0;
-  border: 1px solid #80bd43;
-  padding: 10px;
-  margin: 0;
-  list-style: none;
-  margin-bottom: 15px;
-}
 .navbar-brand{
   padding: 0
 }
@@ -134,12 +126,15 @@ ul.alert.alert-danger{
 ol.breadcrumb{
   border-radius: 0;
   background-color: #ffecf5;
-  color: #673367;
+  color: #9c699c;
+}
+.breadcrumb .glyphicon {
+  padding-right: 7px;
 }
 
 .post h2{
-  background: url("/images/standart/h1img.png") center left / contain no-repeat;
-  padding-left: 75px;
+  background: url("/images/standart/h1img.jpg") top right / contain no-repeat;
+  padding-right: 20%;
 }
 
 .post .description{
@@ -156,12 +151,6 @@ ol.breadcrumb{
   width: 100%;
 }
 
-.linknext{
-  font-size: 1.1em;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
 .cats-menu li{
   margin: 5px 0;
 }
@@ -169,48 +158,9 @@ ol.breadcrumb{
   margin-right: 10px;
 }
 
-.tags-menu h2{
-  color: #681673;
-}
-.tags-menu li{
-  text-transform: uppercase;
-  margin: 5px 0;
-  border: 2px solid #ac4bb9;
-  border-radius: 10px;
-  padding: 1px 7px;
-  transition: background-color 1s;
-}
-
-.tags-menu li:hover{
-  background-color: #a3ff68; 
-}
-
-.tags-menu li a{
-      color: #8c5394;
-}
-
 .contacts{
   font-size: 1.1em;
   font-weight: bold
-}
-
-.tagcloud a{
-  display: block;
-  font-size: 1.3em;
-  margin: 5px;
-}
-
-.tagcloud a:focus,
-.tagcloud a:hover{
-  text-decoration: none;
-}
-.tagcloud .label-default{
-  transition-property: background-color;	
-  transition-duration: 1s;
-}
-
-.tagcloud .label-default:hover{
-  background-color: #a1426f;
 }
 
 .meta-post{
@@ -219,6 +169,9 @@ ol.breadcrumb{
 
 .meta-post .pull-right a{
   margin: 0 5px;
+}
+.meta-post a.label{
+  color: white!important;
 }
 
 .meta-post a:hover,
@@ -330,17 +283,7 @@ span.sharer{
   border-bottom: 2px solid #9b4dca;
   margin: 10px 0;
 }
-.tags-short ol.breadcrumb{
-  background-color: inherit;
-  border-bottom: 1px solid #9656ac;
-}
-.tags-short a{
-  color: #99dcf7!important;
-}
-.tags-short a:hover,
-.tags-short a:focus{
-  color: #99f7de!important;
-}
+
 .body-short h3,
 .shortnames{
   display: inline;
@@ -471,9 +414,6 @@ article .alert-info {
   .subscription button{
     font-size: 0.8em;
   }
-  .post h2 {
-    padding-left: 105px;
-  }
 }
 @media(min-width: 768px){
   .navbar-right {
@@ -481,13 +421,6 @@ article .alert-info {
   }
 }
 @media(max-width:767px){
-  .post h2 {
-      background: none;
-      padding-left: 0!important;
-  }
-  .tagcloud a {
-    float: left;
-  }
   .short{
     overflow: hidden;
   }

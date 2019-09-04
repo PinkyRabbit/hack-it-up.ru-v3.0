@@ -2,7 +2,7 @@
   <div class="meta-post">
     <span class="pull-right">
       {% for tag in tags %}
-        <a href="/tag/{{tag.slug}}" title="В раздел про {{tag.name}}" data-toggle="tooltip" data-placement="bottom">
+        <a href="/tag/{{tag.slug}}" title="В раздел про {{tag.name}}" data-toggle="tooltip" data-placement="bottom" class="label label-default">
           <span class="label label-warning"></span> {{tag.name}}
         </a>
       {% endfor %}
