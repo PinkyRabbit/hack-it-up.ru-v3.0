@@ -13,6 +13,7 @@ const unstablePath = new RegExp(`/((?!${reservedRoutes.join('|')}).)*`);
 module.exports = (app) => {
   app.get('*', async (req, res, next) => {
     res.locals.isAdmin = process.env.NODE_ENV === 'development' || req.user;
+    res.locals._csrf = req.csrfToken();
     res.locals.categories = await getCategoriesList();
     res.locals.fiveRandomTags = await getFiveRandom();
     return next();

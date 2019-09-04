@@ -176,6 +176,22 @@ const validateLogin = (req, res, next) => {
   return next();
 };
 
+const validateEmail = (req, res, next) => {
+  const { email } = req.body;
+  const { error, value } = Joi.validate({ email }, {
+    email: Joi.string().email().required(),
+  });
+  if (error) {
+    req.flash('success', 'Ошибка в указаной почте... *_*');
+
+    res.status(400);
+    return res.redirect('back');
+  }
+  req.validatedBody = value;
+
+  return next();
+};
+
 module.exports = {
   validateId,
   validateArticle,
@@ -187,4 +203,5 @@ module.exports = {
   validateComment,
   validateCommentByAdmin,
   validateLogin,
+  validateEmail,
 };

@@ -21,7 +21,6 @@ async function editComment(req, res, next) {
   return res.render('admin/comment', {
     ...comment,
     sidebar: true,
-    _csrf: req.csrfToken(),
   });
 }
 

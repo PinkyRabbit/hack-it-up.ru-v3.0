@@ -83,7 +83,6 @@ async function getAdminPage(req, res) {
     categories,
     tags,
     comments: formatedComments,
-    _csrf: req.csrfToken(),
   });
 }
 

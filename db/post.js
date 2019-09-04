@@ -120,7 +120,7 @@ const PostsQuery = {
     },
   }),
 
-  getOneByIdWithRelations: _id => new Promise(async (resolve, reject) => {
+  getOneByIdWithRelations: _id => new Promise((resolve, reject) => {
     const aggregation = [...getFullAggrigationWithoutQuery];
     aggregation.unshift({ $match: { _id: mongodbId(_id) } });
     aggregation.push(projectForFullArticle);
@@ -131,7 +131,7 @@ const PostsQuery = {
   }),
 
   getOneBySlugWithRelations: slug => new Promise((resolve, reject) => {
-    const project = Object.assign({}, projectForFullArticle);
+    const project = { ...projectForFullArticle };
     const aggregation = [...getFullAggrigationWithoutQuery];
     aggregation.unshift({ $match: { slug } });
     aggregation.push({ $lookup: join.comments });
@@ -224,7 +224,8 @@ const PostsQuery = {
 
   findByCommentsIdArray: commentsIdArray => Post.aggregate([
     { $lookup: join.comments },
-    { $match: {
+    {
+      $match: {
         'comments._id': { $in: commentsIdArray },
       },
     },
@@ -239,16 +240,18 @@ const PostsQuery = {
       $project: {
         slug: 1,
         h1: 1,
-        comments: { $map:
+        comments:
+        {
+          $map:
           {
-            input: "$comments",
-            as: "comments1",
-            in: { "$toString": "$$comments1._id" },
-          }
+            input: '$comments',
+            as: 'comments1',
+            in: { $toString: '$$comments1._id' },
+          },
         },
-        categorySlug: '$categories.slug'
-      }
-    }
+        categorySlug: '$categories.slug',
+      },
+    },
   ]),
 };
 

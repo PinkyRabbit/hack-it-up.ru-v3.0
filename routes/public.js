@@ -2,12 +2,14 @@ const express = require('express');
 const { isEmpty } = require('lodash');
 
 const articleController = require('../controllers/article');
+const subscriptionController = require('../controllers/subscriptions');
 const authorization = require('./auth');
 
 const {
   validateSlugs,
   validateComment,
   validateLogin,
+  validateEmail,
 } = require('./validator');
 const { getAboutMePage } = require('../services/markdown');
 
@@ -35,7 +37,8 @@ publicRouter
   )
   .get('/login', loginPage)
   .post('/login', validateLogin, authorization)
-  .get('/logout', logout);
+  .get('/logout', logout)
+  .post('/subscribe', validateEmail, subscribe);
 
 async function csrf(req, res) {
   const token = req.csrfToken();
@@ -126,10 +129,9 @@ async function loginPage(req, res) {
     description: 'Страничка входа =) Только нафиг она вам сдалась-то?',
     scripts: {
       costume: [
-        'https://www.google.com/recaptcha/api.js'
+        'https://www.google.com/recaptcha/api.js',
       ],
     },
-    _csrf: req.csrfToken(),
   });
 }
 
@@ -137,6 +139,18 @@ async function logout(req, res) {
   req.logout();
   req.flash('info', 'Вы вышли. Заходите ещё!');
   res.redirect('/');
+}
+
+async function subscribe(req, res) {
+  const { validatedBody } = req;
+  const { error } = await subscriptionController.subscribe(validatedBody);
+  if (error) {
+    req.flash('info', error);
+  } else {
+    req.flash('success', 'Спасибо за подписку! Надеюсь, она будет для вас реально полезной!');
+  }
+
+  res.redirect('back');
 }
 
 module.exports = publicRouter;

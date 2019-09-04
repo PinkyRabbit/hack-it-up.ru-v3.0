@@ -4,6 +4,7 @@ const reservedRoutes = [
   'tag',
   'about-me',
   'logout',
+  'subscribe',
 ];
 
 const articleFields = [

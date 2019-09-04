@@ -22,4 +22,5 @@ module.exports = {
   Category: monk(url).get('category'),
   Tag: monk(url).get('tag'),
   Comment: monk(url).get('comment'),
+  Subscription: monk(url).get('subscription'),
 };

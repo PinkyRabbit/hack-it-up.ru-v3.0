@@ -58,7 +58,6 @@ unstableRouter
           ...article,
           sidebar: true,
           google: true,
-          _csrf: req.csrfToken(),
           scripts: {
             custom: [
               '/js/comments/runtime~main.be600aad.js',

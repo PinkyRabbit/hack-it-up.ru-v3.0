@@ -14,6 +14,9 @@ module.exports = {
     "comma-dangle": ["error", "always-multiline"],
     "no-multi-spaces": ["error", { "exceptions": { "VariableDeclarator": true } }],
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "newline-per-chained-call": "off",
+    "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
+    "curly": ["error", "all"],
     "newline-per-chained-call": "off"
   }
 };

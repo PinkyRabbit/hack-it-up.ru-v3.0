@@ -74,6 +74,15 @@ a:focus{
 .navbar-brand{
   padding: 0
 }
+.btn-warning {
+  background-color: #d78f77;
+  border-color: #da9881;
+}
+.btn-warning:hover,
+.btn-warning:focus{
+  background-color: #e29277;
+  border-color: #ca9d8e;
+}
 .btn-danger {
   background-color: #9b4dca;
   border: 0.1rem solid #9b4dca;

@@ -76,7 +76,6 @@ async function viewArticle(req, res) {
       ? post.tags.map(tag => ({ name: tag }))
       : [],
     sidebar: true,
-    _csrf: req.csrfToken(),
   });
 }
 

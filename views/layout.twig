@@ -58,9 +58,14 @@
               <!-- subscribe -->
               <h4>Подпишись:</h4>
               <form method="post" action="/subscribe" id="subform">
-                <input type="hidden" value={{ csrf }} name="_csrf">
-                <div class="form-group">
+                <input type="hidden" value={{ _csrf }} name="_csrf">
+                <div class="input-group">
                   <input type="email" name="email" class="form-control" id="subemail" placeholder="Ваш email...">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-warning">
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                  </div>
                 </div>
               </form>
               <!-- subscribe -->

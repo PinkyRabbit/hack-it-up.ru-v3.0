@@ -15,9 +15,7 @@ const CommentQuery = {
   deleteAll: author => Comment.remove({ author }),
 
   getLastComments: () => Comment.find({}, {
-    sort: {
-      createdAt: 1
-    },
+    sort: { createdAt: -1 },
     limit: 5,
   }),
 };
