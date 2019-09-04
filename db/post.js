@@ -221,6 +221,35 @@ const PostsQuery = {
     { $lookup: join.comments },
     { $project: { comments: 1 } },
   ]),
+
+  findByCommentsIdArray: commentsIdArray => Post.aggregate([
+    { $lookup: join.comments },
+    { $match: {
+        'comments._id': { $in: commentsIdArray },
+      },
+    },
+    { $lookup: join.categories },
+    {
+      $unwind: {
+        path: '$categories',
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $project: {
+        slug: 1,
+        h1: 1,
+        comments: { $map:
+          {
+            input: "$comments",
+            as: "comments1",
+            in: { "$toString": "$$comments1._id" },
+          }
+        },
+        categorySlug: '$categories.slug'
+      }
+    }
+  ]),
 };
 
 module.exports = PostsQuery;

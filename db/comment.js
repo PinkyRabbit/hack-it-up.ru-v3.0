@@ -13,6 +13,13 @@ const CommentQuery = {
   delete: _id => Comment.remove({ _id }),
 
   deleteAll: author => Comment.remove({ author }),
+
+  getLastComments: () => Comment.find({}, {
+    sort: {
+      createdAt: 1
+    },
+    limit: 5,
+  }),
 };
 
 module.exports = CommentQuery;

@@ -7,9 +7,16 @@ const adminCategoryRoute = require('./category');
 const adminTagsRoute = require('./tags');
 const adminCommentRoute = require('./comment');
 const { generator } = require('../../utils/helpers');
-const { getUnpublished } = require('../../db/post');
+const {
+  getUnpublished,
+  findByCommentsIdArray,
+} = require('../../db/post');
 const { getAllTags } = require('../../db/tag');
 const { getAllCategories } = require('../../db/category');
+const {
+  getLastComments,
+  delete: deleteComment,
+} = require('../../db/comment');
 
 const adminRouter = express.Router();
 
@@ -48,9 +55,36 @@ async function getAdminPage(req, res) {
   }));
   const tags = await getAllTags();
   const categories = await getAllCategories();
+  const comments = await getLastComments();
+  const commentId = comments.map(comment => comment._id);
+  const associatedArticleWithComments = await findByCommentsIdArray(commentId);
+  const excessCommentsQuery = [];
+  const formatedComments = comments.map((comment) => {
+    const article = associatedArticleWithComments.find(post => post.comments.includes(comment._id.toString()));
+    if (!article) {
+      excessCommentsQuery.push(deleteComment(comment._id));
+      return null;
+    }
+    return {
+      url: `/${article.categorySlug}/${article.slug}`,
+      body: comment.body,
+      h1: article.h1,
+      createdAt: moment(comment.createdAt).locale('ru').format('ll'),
+    };
+  })
+    .filter(comment => !!comment);
 
-  // res.json({ posts, categories, tags });
-  return res.render('admin/dashboard', { posts, categories, tags, _csrf: req.csrfToken() });
+  if (excessCommentsQuery.length) {
+    await Promise.all(excessCommentsQuery);
+  }
+
+  return res.render('admin/dashboard', {
+    posts,
+    categories,
+    tags,
+    comments: formatedComments,
+    _csrf: req.csrfToken(),
+  });
 }
 
 module.exports = adminRouter;

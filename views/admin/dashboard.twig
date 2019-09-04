@@ -1,6 +1,19 @@
 {% extends '../layout.twig' %}
 
 {% block bodyblock %}
+  {% if comments %}
+    <h3>Последние комментарии</h3>
+    <ul class="list-group">
+    {% for comment in comments %}
+      <li class="list-group-item">
+        {{ comment.createdAt }}
+        <span style="font-style: italic;color: #803b5c">{{ comment.body }}</span>
+        <a href="{{comment.url}}" class="delete-x" title="{{ comment.h1 }}">➤</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
   {% if posts %}
     <h3>Неопубликованные материалы</h3>
     <ul class="list-group">
