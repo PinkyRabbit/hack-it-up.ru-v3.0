@@ -6,6 +6,7 @@ module.exports = (err, req, res, next) => {
   res.locals.scripts = {};
   res.locals.scripts.costume = 'https://www.google.com/recaptcha/api.js';
 
+  // @FIXME: need to rework this
   const errObj = {
     status: 404,
   };

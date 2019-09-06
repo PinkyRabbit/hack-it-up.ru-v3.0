@@ -66,7 +66,7 @@ unstableRouter
             ],
           },
         });
-      default:
+      default: // if it is not a category or article
         return next();
     }
     /* eslint-enable no-case-declarations */

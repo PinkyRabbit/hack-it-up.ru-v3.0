@@ -1,5 +1,5 @@
 const https         = require('https');
-const logger        = require('./logger');
+const logger        = require('../utils/logger');
 const { recaptcha } = require('../config');
 
 module.exports = (req, res, next) => {

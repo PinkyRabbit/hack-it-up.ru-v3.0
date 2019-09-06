@@ -1,14 +1,6 @@
 const monk = require('monk');
 
-/* eslint-disable prefer-template */
-const url = [
-  process.env.DB_USER
-    ? process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@'
-    : '',
-  process.env.IP + ':27017',
-  process.env.NODE_ENV === 'test' ? '/test' : '/' + process.env.DB,
-].join('');
-/* eslint-enable prefer-template */
+const { connectUrl: url } = require('../configs/database');
 
 monk(url).catch((err) => {
   console.log(err); // eslint-disable-line

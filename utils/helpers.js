@@ -32,7 +32,7 @@ const generator = async (query) => {
   return { error: true };
 };
 
-const lean = object => Object.assign({}, object);
+const lean = object => ({ ...object });
 
 module.exports = {
   createSlug,

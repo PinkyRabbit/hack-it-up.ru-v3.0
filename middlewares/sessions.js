@@ -2,14 +2,14 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const MemoryStore = require('memorystore')(session);
 
-const RESAVE = !(process.env.NODE_ENV === 'production');
+const { name, resave, secret } = require('../configs/session');
 
 module.exports = (app) => {
   app.use(session({
-    name: process.env.SESSION_NAME,
-    resave: RESAVE,
+    name,
+    resave,
+    secret,
     saveUninitialized: false,
-    secret: process.env.SESSION_SECRET,
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,

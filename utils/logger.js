@@ -1,7 +1,8 @@
 const log4js = require('log4js');
 const path = require('path');
 
-const { transportOps } = require('./email');
+const { transportOps } = require('../services/email');
+const { recipients, loggerType, deliveryEmail } = require('../configs/logger');
 
 const FILENAME = path.resolve(__dirname, '../logs/app.log');
 
@@ -13,8 +14,8 @@ log4js.configure({
     toFile: { type: 'file', filename: FILENAME },
     email: {
       type: '@log4js-node/smtp',
-      recipients: process.env.ADMIN_EMAIL,
-      sender: `"Сайт hack-it-up" <${process.env.EMAIL_DELIVERY_EMAIL}>`,
+      recipients,
+      sender: `"Сайт hack-it-up" <${deliveryEmail}>`,
       subject: 'Ошибка на сайте',
       sendInterval: 3600,
       transport: transportOps,
@@ -25,26 +26,17 @@ log4js.configure({
       appenders: ['toFile', 'out'],
       level: 'error',
     },
-    dev: {
+    development: {
       appenders: ['out'],
       level: 'debug',
     },
-    prod: {
+    production: {
       appenders: ['toFile', 'email'],
       level: 'debug',
     },
   },
 });
 
-const type = process.env.NODE_ENV || 'development';
-
-const useLogger = ({
-  production: 'prod',
-  development: 'dev',
-  test: 'default',
-})[type];
-
-
-const logger = log4js.getLogger(useLogger);
+const logger = log4js.getLogger(loggerType);
 
 module.exports = logger;

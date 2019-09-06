@@ -24,20 +24,21 @@ function toHtml(str) {
     .replace(/\n/gm, '<br>');
 }
 
-const sendMail = ({ to, subject, text }) => {
-  return new Promise((resolve, reject) => {
-    mailOptions.to = to;
-    mailOptions.subject = subject;
-    mailOptions.text = text;
-    mailOptions.html = toHtml(text);
+const sendMail = ({ to, subject, text }) => new Promise((resolve, reject) => {
+  mailOptions.to = to;
+  mailOptions.subject = subject;
+  mailOptions.text = text;
+  mailOptions.html = toHtml(text);
 
-    smtpTransport.sendMail(mailOptions, (error, response) => {
-      if (error) return reject(error);
-      smtpTransport.close();
-      return resolve();
-    });
+  smtpTransport.sendMail(mailOptions, (error) => {
+    if (error) {
+      reject(error);
+    }
+
+    smtpTransport.close();
+    resolve();
   });
-};
+});
 
 module.exports = {
   transportOps,
