@@ -40,7 +40,13 @@ const sendMail = ({ to, subject, text }) => new Promise((resolve, reject) => {
   });
 });
 
+const sendGreetings = () => {};
+
+const sendUpdates = () => {};
+
 module.exports = {
   transportOps,
   sendMail,
+  sendGreetings,
+  sendUpdates,
 };
