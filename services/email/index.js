@@ -1,11 +1,12 @@
 const nodemailer = require('nodemailer');
 
+const Error = require('../../db/error');
+const greetingTemplate = require('./templates/greeting');
+const { auth, domain } = require('../../configs/email');
+
 const transportOps = {
   service: 'Mail.ru',
-  auth: {
-    user: process.env.EMAIL_DELIVERY_EMAIL,
-    pass: process.env.EMAIL_DELIVERY_PASSWORD,
-  },
+  auth,
   // pool: true,
   // host: 'hack-it-up.ru',
   // port: 465,
@@ -14,33 +15,34 @@ const transportOps = {
 
 const smtpTransport = nodemailer.createTransport(transportOps);
 
-const mailOptions = { from: `Hello World <${process.env.EMAIL_DELIVERY_EMAIL}>` };
+const mailOptions = { from: `Сайт ${domain}<${auth.user}>` };
 
-function toHtml(str) {
-  return str
-    .replace(/[\s\r\n]+$/, '')
-    .replace(/^[\s\r\n]+/, '')
-    .replace(/\r\n/gm, '<br>')
-    .replace(/\n/gm, '<br>');
-}
-
-const sendMail = ({ to, subject, text }) => new Promise((resolve, reject) => {
+const sendMail = ({ to, subject, html }) => {
   mailOptions.to = to;
   mailOptions.subject = subject;
-  mailOptions.text = text;
-  mailOptions.html = toHtml(text);
+  mailOptions.html = html;
 
   smtpTransport.sendMail(mailOptions, (error) => {
     if (error) {
-      reject(error);
+      Error.new({
+        stack: error.stack,
+        message: error.response,
+      });
     }
 
     smtpTransport.close();
-    resolve();
   });
-});
+};
 
-const sendGreetings = () => {};
+const sendGreetings = (emailObject) => {
+  const emailBody = greetingTemplate(emailObject);
+  const email = {
+    to: emailObject.email,
+    subject: `Добро пожаловать на ${domain}!`,
+    html: emailBody,
+  };
+  sendMail(email);
+};
 
 const sendUpdates = () => {};
 

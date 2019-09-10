@@ -1,11 +1,10 @@
-const createError  = require('http-errors');
-
 const adminRoutes = require('./admin');
 const publicRoutes = require('./public');
 const unstableRoutes = require('./unstable');
 const { getCategoriesList } = require('../controllers/categories');
 const { getFiveRandom } = require('../controllers/tags');
 const errorHandler = require('../services/errors');
+const createError = require('../utils/error');
 const { reservedRoutes } = require('./validator.config');
 
 const unstablePath = new RegExp(`/((?!${reservedRoutes.join('|')}).)*`);

@@ -1,8 +1,8 @@
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt        = require('bcrypt');
-const createError   = require('http-errors');
 
+const createError = require('../utils/error');
 const { User } = require('../db');
 
 const ENV = process.env.NODE_ENV;

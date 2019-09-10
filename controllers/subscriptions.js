@@ -20,6 +20,12 @@ const subscribe = async ({ email }) => {
   return { subscription: subscriptionInfo };
 };
 
+const unsubscribe = async ({ email, pass }) => {
+  await Subscription.delete({ email, pass });
+  return 'subscription.successfullyDeleted';
+};
+
 module.exports = {
   subscribe,
+  unsubscribe,
 };

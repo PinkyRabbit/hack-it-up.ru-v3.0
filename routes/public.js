@@ -3,6 +3,7 @@ const { isEmpty } = require('lodash');
 
 const articleController = require('../controllers/article');
 const subscriptionController = require('../controllers/subscriptions');
+const emailService = require('../services/email');
 const authorization = require('./auth');
 
 const {
@@ -10,6 +11,7 @@ const {
   validateComment,
   validateLogin,
   validateEmail,
+  validateUnsubscribe,
 } = require('./validator');
 const { getAboutMePage } = require('../services/markdown');
 
@@ -38,7 +40,8 @@ publicRouter
   .get('/login', loginPage)
   .post('/login', validateLogin, authorization)
   .get('/logout', logout)
-  .post('/subscribe', validateEmail, subscribe);
+  .post('/subscribe', validateEmail, subscribe)
+  .get('/unsubscribe', validateUnsubscribe, unsubscribe);
 
 async function csrf(req, res) {
   const token = req.csrfToken();
@@ -143,13 +146,22 @@ async function logout(req, res) {
 
 async function subscribe(req, res) {
   const { validatedBody } = req;
-  const { error } = await subscriptionController.subscribe(validatedBody);
+  const { error, subscription } = await subscriptionController.subscribe(validatedBody);
   if (error) {
     req.flash('info', error);
   } else {
     req.flash('success', 'Спасибо за подписку! Надеюсь, она будет для вас реально полезной!');
+    emailService.sendGreetings(subscription);
   }
 
+  res.redirect('back');
+}
+
+async function unsubscribe(req, res) {
+  const { validatedBody } = req;
+  await subscriptionController.unsubscribe(validatedBody);
+
+  req.flash('success', 'Вы успешно отписались от подписки :)');
   res.redirect('back');
 }
 

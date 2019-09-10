@@ -5,6 +5,7 @@ const reservedRoutes = [
   'about-me',
   'logout',
   'subscribe',
+  'unsubscribe',
 ];
 
 const articleFields = [

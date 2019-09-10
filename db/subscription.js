@@ -1,3 +1,5 @@
+const uuid = require('uuidv4').default;
+
 const { Subscription } = require('.');
 
 const SubscriptionQuery = {
@@ -17,7 +19,10 @@ const SubscriptionQuery = {
   create: email => Subscription.insert({
     email,
     createdAt: new Date(),
+    pass: uuid(),
   }),
+
+  delete: ({ email, pass }) => Subscription.remove({ email, pass }),
 };
 
 module.exports = SubscriptionQuery;

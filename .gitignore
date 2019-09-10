@@ -7,6 +7,5 @@ node_modules/
 subscribers.txt
 public/images/uploads/*.*
 old/
-configs/
 test/
 *.log

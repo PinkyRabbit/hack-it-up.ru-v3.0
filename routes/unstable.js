@@ -1,7 +1,7 @@
 const express = require('express');
 const { isEmpty } = require('lodash');
-const createError = require('http-errors');
 
+const createError = require('../utils/error');
 const articleController = require('../controllers/article');
 const {
   validateArticleSlugs,

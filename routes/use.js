@@ -1,5 +1,4 @@
-const createError  = require('http-errors');
-
+const createError = require('../utils/error');
 const Posts = require('../db/post');
 
 const article = async (req, res, next) => {

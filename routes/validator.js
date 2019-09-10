@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const createError = require('http-errors');
 const { uniq } = require('lodash');
 
+const createError = require('../utils/error');
 const config = require('./validator.config');
 
 Joi.objectId = require('joi-objectid')(Joi);
@@ -192,6 +192,19 @@ const validateEmail = (req, res, next) => {
   return next();
 };
 
+const validateUnsubscribe = (req, res, next) => {
+  const query = Object.assign(...Object.entries(req.query).map(([key, value]) => ({ [key.replace('amp;', '')]: value })));
+  const { error, value } = Joi.validate(query, {
+    email: Joi.string().email().required(),
+    pass: Joi.string().min(2).required(),
+  });
+  if (error) {
+    return next(createError(404, 'Страница не существует'));
+  }
+  req.validatedBody = value;
+  return next();
+};
+
 module.exports = {
   validateId,
   validateArticle,
@@ -204,4 +217,5 @@ module.exports = {
   validateCommentByAdmin,
   validateLogin,
   validateEmail,
+  validateUnsubscribe,
 };
