@@ -5,6 +5,7 @@ const articleController = require('../controllers/article');
 const subscriptionController = require('../controllers/subscriptions');
 const emailService = require('../services/email');
 const authorization = require('./auth');
+const fakeNews = require('../utils/fakeNews');
 
 const {
   validateSlugs,
@@ -41,7 +42,11 @@ publicRouter
   .post('/login', validateLogin, authorization)
   .get('/logout', logout)
   .post('/subscribe', validateEmail, subscribe)
-  .get('/unsubscribe', validateUnsubscribe, unsubscribe);
+  .get('/unsubscribe', validateUnsubscribe, unsubscribe)
+  .get('/callme', async (req, res) => {
+    const newss = await fakeNews();
+    res.json(newss);
+  });
 
 async function csrf(req, res) {
   const token = req.csrfToken();

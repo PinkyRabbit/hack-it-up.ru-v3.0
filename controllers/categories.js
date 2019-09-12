@@ -42,7 +42,7 @@ const getCategoriesList = async () => {
   }));
 
   return sanitized;
-}
+};
 
 module.exports = {
   getAllCategories,
