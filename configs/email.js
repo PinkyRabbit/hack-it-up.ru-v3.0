@@ -4,7 +4,7 @@ const emailConfig = {
   auth: {
     user: process.env.EMAIL_DELIVERY_EMAIL,
     pass: process.env.EMAIL_DELIVERY_PASSWORD,
-  }
+  },
 };
 
 emailConfig.websiteUrl = `${emailConfig.protocol}://${emailConfig.domain}`;

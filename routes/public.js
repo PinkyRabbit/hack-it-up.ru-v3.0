@@ -98,7 +98,7 @@ async function aboutMePage(req, res) {
     title: 'О себе',
     h1: 'Вижу Вас как на яву!',
     keywords: 'Про меня',
-    postimage: 'standart/aboutme.jpg',
+    postimage: '/images/standart/aboutme.jpg',
     description: 'Тебя тоже нелегко узнать, — согласился Нумминорих. — Но пахнешь-то ты всё так же. — Как свеженькая кошачья какашка, — добавил я.',
   });
 }
@@ -133,7 +133,7 @@ async function loginPage(req, res) {
     title: 'Вход...',
     h1: 'Дорога в эхо',
     keywords: 'login',
-    postimage: 'standart/login.jpg',
+    postimage: '/images/standart/login.jpg',
     description: 'Страничка входа =) Только нафиг она вам сдалась-то?',
     scripts: {
       costume: [

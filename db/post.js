@@ -151,10 +151,9 @@ const PostsQuery = {
     if (filter) {
       aggregation.push({ $match: filter });
     }
-    aggregation.push({ $limit: limit });
+    aggregation.push({ $limit: (limit * page) });
     aggregation.push({ $skip: offset });
     aggregation.push({ $sort: { updatedAt: -1 } });
-
     return Post.aggregate(aggregation);
   },
 

@@ -42,7 +42,7 @@ module.exports = (err, req, res, next) => {
     description: 'Такой страницы не существует! Ошибка!',
     h1: 'Ой! Ошибка!',
     keywords: `ошибка ${errorObject.status}`,
-    postimage: 'standart/404.jpg',
+    postimage: '/images/standart/404.jpg',
   };
 
   if (errorObject.status >= 500) {

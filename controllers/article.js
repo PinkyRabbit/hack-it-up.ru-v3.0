@@ -23,7 +23,7 @@ const updateImage = async (article, file) => {
       logger.warn(err.message);
     }
   }
-  const newImage = `uploads/${file.filename}`;
+  const newImage = `/images/uploads/${file.filename}`;
   await Posts.updateImage(article._id, newImage);
   return newImage;
 };
@@ -73,7 +73,7 @@ const getNews = async ({ page = 1 }) => {
     title: 'Главная',
     h1: 'Hello world!',
     keywords: 'developer, примеры, nodejs, учить',
-    postimage: 'standart/main.jpg',
+    postimage: '/images/standart/main.jpg',
     description: 'Этот блог родился, когда я делал первые шаги в NodeJS. В нём я публикую свои мысли и заметки про программирование и лучше писать код.',
   };
   if (page !== 1) {
@@ -94,7 +94,7 @@ const getCategoryNews = async (slug, { page = 1 }) => {
       title: `Раздел ${category.name}`,
       h1: category.name,
       keywords: category.keywords || '',
-      postimage: 'standart/main.jpg',
+      postimage: '/images/standart/main.jpg',
       description: category.description || '',
     };
     if (page !== 1) {
@@ -117,7 +117,7 @@ const getTagNews = async (slug, { page = 1 }) => {
       title: tag.name,
       h1: `Про ${tag.name}.`,
       keywords: tag.name,
-      postimage: 'standart/main.jpg',
+      postimage: '/images/standart/main.jpg',
       description: `Это раздел про ${tag.name}.` || '',
     };
     if (page !== 1) {

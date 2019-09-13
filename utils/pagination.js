@@ -3,7 +3,8 @@ const limit = parseInt(process.env.PAGE_LIMIT, 10);
 // page number for ui is plus 1
 const ui = num => 1 + num;
 
-const twigsPagination = (count, page = 0, path = '/') => {
+const twigsPagination = (count, p = 0, path = '/') => {
+  const page = parseInt(p , 10);
   const pagesCount = Math.ceil(count / limit);
 
   const pagination = [

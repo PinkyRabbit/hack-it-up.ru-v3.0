@@ -15,7 +15,7 @@ adminCommentRouter
   .get('/:commentId/delete', validateId('commentId'), deleteComment)
   .get('/:commentId/all', validateId('commentId'), deleteAllCommentsByAuthor);
 
-async function editComment(req, res, next) {
+async function editComment(req, res) {
   const { commentId } = req.params;
   const comment = await Comment.findById(commentId);
   return res.render('admin/comment', {
@@ -24,7 +24,7 @@ async function editComment(req, res, next) {
   });
 }
 
-async function saveComment(req, res, next) {
+async function saveComment(req, res) {
   const { commentId } = req.params;
   const { validatedBody: { body } } = req;
   await Comment.updateBody(commentId, body);
@@ -32,14 +32,14 @@ async function saveComment(req, res, next) {
   res.redirect('back');
 }
 
-async function deleteComment(req, res, next) {
+async function deleteComment(req, res) {
   const { commentId } = req.params;
   await Comment.delete(commentId);
   req.flash('success', 'Комментарий безвозвратно удалён');
   res.redirect('back');
 }
 
-async function deleteAllCommentsByAuthor(req, res, next) {
+async function deleteAllCommentsByAuthor(req, res) {
   const { commentId } = req.params;
   const comment = await Comment.findById(commentId);
   const { author } = comment;

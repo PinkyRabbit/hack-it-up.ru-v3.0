@@ -36,7 +36,7 @@ function addSeoAdmin(req, res, next) {
   res.locals.description = 'Админка';
   res.locals.h1 = 'Админка';
   res.locals.keywords = 'Админка';
-  res.locals.postimage = 'standart/admin.jpg';
+  res.locals.postimage = '/images/standart/admin.jpg';
 
   return next();
 }
@@ -60,7 +60,8 @@ async function getAdminPage(req, res) {
   const associatedArticleWithComments = await findByCommentsIdArray(commentId);
   const excessCommentsQuery = [];
   const formatedComments = comments.map((comment) => {
-    const article = associatedArticleWithComments.find(post => post.comments.includes(comment._id.toString()));
+    const article = associatedArticleWithComments
+      .find(post => post.comments.includes(comment._id.toString()));
     if (!article) {
       excessCommentsQuery.push(deleteComment(comment._id));
       return null;
