@@ -24,6 +24,7 @@ const requestOptions = {
 
 const getFakeNews = async () => {
   const { body } = await getNews(requestOptions);
+
   if (body.status === 'ok') {
     await destroyOldData();
 
@@ -49,7 +50,7 @@ const getFakeNews = async () => {
     ]);
   }
 
-  return { status: 'OK' };
+  return body;
 };
 
 function reworkArticles(baseArticles) {

@@ -48,8 +48,13 @@ publicRouter
   .get('/unsubscribe', validateUnsubscribe, unsubscribe)
   .post('/send-err', recaptcha, validateErrorBody, sendError)
   .get('/callme', async (req, res) => {
-    const newss = await fakeNews();
-    res.json(newss);
+    const result = await fakeNews();
+    if (result.status === 'error') {
+      req.flash('danger', result.message);
+      return res.redirect('/');
+    }
+
+    return res.json({ status: result.status });
   });
 
 async function csrf(req, res) {
