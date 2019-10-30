@@ -27,7 +27,7 @@ const body = ({ from, subjectText }) => `
                               <tr><td height="30"></td></tr>
                               <tr>
                                 <td colspan="3" style="font-size: 1; line-height: 0; margin: 0; padding: 0;">
-                                  <h2 style="color: #b347a6; font-size: 22px; font-weight: bold; line-height: 26px; margin: 0; padding: 0px 30px;">Добро пожаловать на ${domain}!</h2>
+                                  <h2 style="color: #b347a6; font-size: 22px; font-weight: bold; line-height: 26px; margin: 0; padding: 0px 30px;">На сайте была обнаружена новая ошибка!</h2>
                                 </td>
                               </tr>
                             </tbody>
@@ -45,8 +45,6 @@ const body = ({ from, subjectText }) => `
                                     <tbody>
                                       <tr><td colspan="3" height="20"></td></tr>
                                       <tr><td colspan="3">
-                                        <div style="color: #404040; font-size: 16px; line-height: 20px; margin: 0; padding: 0;">На сайте была обнаружена новая ошибка!</div>
-                                        <hr>
                                         <div style="color: #404040; font-size: 16px; line-height: 20px; margin: 0; padding: 0;">Отправитель: ${from}</div>
                                         <hr>
                                         <div style="color: #404040; font-size: 14px; line-height: 20px; margin: 0; padding: 0;">${subjectText}</div>
@@ -77,18 +75,6 @@ const body = ({ from, subjectText }) => `
                             </table>
                           </td>
                         </tr>
-                      </tbody>
-                    </table>
-
-                    <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="690" class="completion">
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div style="font-size: 18px; line-height: 20px; padding: 0px 30px 0px 30px;">С наилучшими пожеланиями,</div>
-                            <div style="font-size: 18px; font-weight: bold; line-height: 20px; padding: 0px 30px 0px 30px;">команда сайта ${domain}</div>
-                          </td>
-                        </tr>
-                        <tr><td height="30"></td></tr>
                       </tbody>
                     </table>
                   </td>

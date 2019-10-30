@@ -50,7 +50,7 @@ const sendError = (emailObject) => {
   const emailBody = errorTemplate(emailObject);
   const email = {
     to: adminEmail,
-    subject: 'Сообщение об ошибке на сайте',
+    subject: 'Ошибка на hack-it-up',
     html: emailBody,
   };
   sendMail(email);
