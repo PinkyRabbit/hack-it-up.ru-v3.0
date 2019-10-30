@@ -88,11 +88,16 @@ function fixContent(content) {
 }
 
 function getTags(title, to = 3) {
-  const tagsArray = title.split(' ');
+  const tagsArray = title
+    .split(' ')
+    .filter(tag => /[a-zа-я0-9]{2}([a-zа-я0-9-]{2,})?/i.test(tag))
+    .map(tag => /[a-zа-я0-9]{2}([a-zа-я0-9-]{2,})?/i.exec(tag)[0]);
 
-  return tagsArray.length > to
-    ? tagsArray.slice(1, to)
-    : 'default';
+  if (!tagsArray.length) {
+    tagsArray.push('default');
+  }
+
+  return tagsArray.length > to ? tagsArray.slice(1, to) : tagsArray;
 }
 
 function getTime(it) {
@@ -103,6 +108,7 @@ function getTime(it) {
 
 function getTagsArray(articles) {
   const allTags = articles.reduce((tags, article) => [...tags, ...article.tags], []);
+
   return uniq(allTags).map(tag => ({
     name: tag,
     slug: createSlug(tag),
@@ -120,7 +126,6 @@ function getCategoriesArray(articles) {
 
 function destroyOldData() {
   return Promise.all([
-    db.User.drop(),
     db.Post.drop(),
     db.Category.drop(),
     db.Tag.drop(),
@@ -130,4 +135,7 @@ function destroyOldData() {
   ]);
 }
 
-module.exports = getFakeNews;
+module.exports = {
+  pull: getFakeNews,
+  drop: destroyOldData,
+};

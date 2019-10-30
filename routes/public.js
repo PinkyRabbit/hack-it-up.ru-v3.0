@@ -48,7 +48,7 @@ publicRouter
   .get('/unsubscribe', validateUnsubscribe, unsubscribe)
   .post('/send-err', recaptcha, validateErrorBody, sendError)
   .get('/callme', async (req, res) => {
-    const result = await fakeNews();
+    const result = await fakeNews.pull();
     if (result.status === 'error') {
       req.flash('danger', result.message);
       return res.redirect('/');

@@ -1,4 +1,4 @@
-const { websiteUrl, domain } = require('../../../../configs/email');
+const { websiteUrl } = require('../../../../configs/email');
 
 const body = ({ from, subjectText }) => `
 <!DOCTYPE html>
