@@ -1,25 +1,15 @@
 const adminRoutes = require('./admin');
 const publicRoutes = require('./public');
 const unstableRoutes = require('./unstable');
-const { getCategoriesList } = require('../controllers/categories');
-const { getFiveRandom } = require('../controllers/tags');
 const errorHandler = require('../services/errors');
 const createError = require('../utils/error');
 const { reservedRoutes } = require('./validator.config');
+const globalVariables = require('../middlewares/globalVariables');
 
 const unstablePath = new RegExp(`/((?!${reservedRoutes.join('|')}).)*`);
 
 module.exports = (app) => {
-  app.get('*', async (req, res, next) => {
-    res.locals.isAdmin = process.env.NODE_ENV === 'development' || req.user;
-    res.locals._csrf = req.csrfToken();
-    res.locals.categories = await getCategoriesList();
-    res.locals.fiveRandomTags = await getFiveRandom();
-    res.locals.scripts = {};
-    res.locals.scripts.custom = [];
-    return next();
-  });
-
+  globalVariables.init(app);
   app.use('/admin', adminRoutes);
   app.use('/', publicRoutes);
   app.use(unstablePath, unstableRoutes);

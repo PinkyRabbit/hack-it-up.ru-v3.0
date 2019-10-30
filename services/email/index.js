@@ -2,7 +2,9 @@ const nodemailer = require('nodemailer');
 
 const Error = require('../../db/error');
 const greetingTemplate = require('./templates/greeting');
+const errorTemplate = require('./templates/error');
 const { auth, domain } = require('../../configs/email');
+const { recipients: adminEmail } = require('../../configs/logger');
 
 const transportOps = {
   service: 'Mail.ru',
@@ -44,11 +46,22 @@ const sendGreetings = (emailObject) => {
   sendMail(email);
 };
 
-const sendUpdates = () => {};
+const sendError = (emailObject) => {
+  const emailBody = errorTemplate(emailObject);
+  const email = {
+    to: adminEmail,
+    subject: 'Сообщение об ошибке на сайте',
+    html: emailBody,
+  };
+  sendMail(email);
+};
+
+const sendUpdates = () => { };
 
 module.exports = {
   transportOps,
   sendMail,
   sendGreetings,
   sendUpdates,
+  sendError,
 };

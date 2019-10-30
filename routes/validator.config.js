@@ -7,6 +7,7 @@ const reservedRoutes = [
   'subscribe',
   'unsubscribe',
   'callme',
+  'send-err',
 ];
 
 const articleFields = [

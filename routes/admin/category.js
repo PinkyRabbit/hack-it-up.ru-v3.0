@@ -12,11 +12,11 @@ adminCategoryRouter
   .get('/json', categoriesJSON)
   .post('/:categoryId/update', validateId('categoryId'), validateCategory, updateCategory)
   .get('/:categoryId/delete', validateId('categoryId'), deleteCategory);
-  // .post('/', createCategory)
-  // .get('/:categoryId', editCategory)
-  // .put('/:categoryId', updateCategory)
-  // .delete('/:categoryId', deleteCategory)
-  // .post('/order', changeCategoriesOrder);
+// .post('/', createCategory)
+// .get('/:categoryId', editCategory)
+// .put('/:categoryId', updateCategory)
+// .delete('/:categoryId', deleteCategory)
+// .post('/order', changeCategoriesOrder);
 
 async function categoriesJSON(req, res) {
   const categories = await categoryController.getAllCategories();

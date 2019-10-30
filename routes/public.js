@@ -1,11 +1,13 @@
 const express = require('express');
 const { isEmpty } = require('lodash');
 
+const { csrfProtection } = require('../middlewares/globalVariables');
 const articleController = require('../controllers/article');
 const subscriptionController = require('../controllers/subscriptions');
 const emailService = require('../services/email');
 const authorization = require('./auth');
 const fakeNews = require('../utils/fakeNews');
+const recaptcha = require('../utils/recaptcha');
 
 const {
   validateSlugs,
@@ -13,6 +15,7 @@ const {
   validateLogin,
   validateEmail,
   validateUnsubscribe,
+  validateErrorBody,
 } = require('./validator');
 const { getAboutMePage } = require('../services/markdown');
 
@@ -39,10 +42,11 @@ publicRouter
     getAppliesComments
   )
   .get('/login', loginPage)
-  .post('/login', validateLogin, authorization)
+  .post('/login', csrfProtection, validateLogin, authorization)
   .get('/logout', logout)
-  .post('/subscribe', validateEmail, subscribe)
+  .post('/subscribe', csrfProtection, validateEmail, subscribe)
   .get('/unsubscribe', validateUnsubscribe, unsubscribe)
+  .post('/send-err', recaptcha, validateErrorBody, sendError)
   .get('/callme', async (req, res) => {
     const newss = await fakeNews();
     res.json(newss);
@@ -168,6 +172,14 @@ async function unsubscribe(req, res) {
 
   req.flash('success', 'Вы успешно отписались от подписки :)');
   res.redirect('back');
+}
+
+async function sendError(req, res) {
+  const { validatedBody } = req;
+  emailService.sendError(validatedBody);
+
+  req.flash('success', 'Ваше сообщение об ошибке успешно отправлено! Спасибо!');
+  res.redirect('/');
 }
 
 module.exports = publicRouter;

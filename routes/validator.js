@@ -40,6 +40,12 @@ const validateLoginSchema = {
   password: Joi.string().regex(/^[a-z0-9-]+$/).required(),
 };
 
+const validateErrorSchema = {
+  name: Joi.string().min(2).required(),
+  email: Joi.string().email().required(),
+  body: Joi.string().min(2).max(250).required(),
+};
+
 const validateSlugs = (slugsArray) => {
   const slugsSchema = getSlugsSchema(slugsArray);
   return (req, res, next) => {
@@ -205,6 +211,17 @@ const validateUnsubscribe = (req, res, next) => {
   return next();
 };
 
+const validateErrorBody = (req, res, next) => {
+  const { _csrf, ...body } = req.body;
+  const { error, value } = Joi.validate(body, validateErrorSchema);
+  if (error) {
+    return next(createError(400, 'Если уж взялись помогать - заполните, пожалуйста, ошибку правильно.'));
+  }
+  req.validatedBody = value;
+  return next();
+};
+
+
 module.exports = {
   validateId,
   validateArticle,
@@ -218,4 +235,5 @@ module.exports = {
   validateLogin,
   validateEmail,
   validateUnsubscribe,
+  validateErrorBody,
 };

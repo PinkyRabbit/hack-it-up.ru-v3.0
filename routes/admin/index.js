@@ -1,12 +1,13 @@
 const express = require('express');
 const moment = require('moment');
 
-const { isAuthenticated } = require('../../utils/authentication');
 const adminArticleRoute = require('./article');
 const adminCategoryRoute = require('./category');
 const adminTagsRoute = require('./tags');
 const adminCommentRoute = require('./comment');
+const { isAuthenticated } = require('../../utils/authentication');
 const { generator } = require('../../utils/helpers');
+const { csrfProtection } = require('../../middlewares/globalVariables');
 const {
   getUnpublished,
   findByCommentsIdArray,
@@ -22,6 +23,7 @@ const adminRouter = express.Router();
 
 adminRouter
   .use('*', isAuthenticated, addSeoAdmin)
+  .post('*', csrfProtection)
   .get('/', getAdminPage)
   .use('/article', adminArticleRoute)
   .use('/categories', adminCategoryRoute)

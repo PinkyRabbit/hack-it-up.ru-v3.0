@@ -18,6 +18,9 @@ module.exports = (req, res, next) => {
     req.session.validationErrors = null;
   }
 
-  if (messages) res.locals.messages = messages;
+  if (messages) {
+    res.locals.messages = messages;
+  }
+
   next();
 };
