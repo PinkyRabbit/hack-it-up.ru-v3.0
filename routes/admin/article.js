@@ -31,8 +31,8 @@ async function editArticle(req, res) {
   const { articleId } = req.params;
   await articleController.makeUnpublished(articleId);
 
-  res.locals.scripts = {};
-  res.locals.scripts.custom = `${process.env.VUE === 'development' ? 'http://localhost:3000' : ''}/js/edit-news.js`;
+  const editNewsScriptUrl = `${process.env.VUE === 'development' ? 'http://localhost:3000' : ''}/js/edit-news.js`;
+  res.locals.scripts.custom.push(editNewsScriptUrl);
   return res.render('public/vue');
 }
 

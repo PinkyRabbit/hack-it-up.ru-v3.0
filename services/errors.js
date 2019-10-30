@@ -13,8 +13,7 @@ const statusesMessages = {
 // eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
   res.locals.isAdmin = process.env.NODE_ENV === 'development' || req.user;
-  res.locals.scripts = {};
-  res.locals.scripts.costume = 'https://www.google.com/recaptcha/api.js';
+  res.locals.scripts.custom.push('https://www.google.com/recaptcha/api.js');
 
   const errorObject = { ...err };
 

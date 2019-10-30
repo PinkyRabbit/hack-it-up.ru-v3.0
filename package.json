@@ -63,6 +63,7 @@
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
     "mocha": "^6.2.0",
+    "nodemon": "^1.19.4",
     "supertest": "^4.0.2"
   }
 }

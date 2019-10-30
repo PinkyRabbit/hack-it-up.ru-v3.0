@@ -15,6 +15,8 @@ module.exports = (app) => {
     res.locals._csrf = req.csrfToken();
     res.locals.categories = await getCategoriesList();
     res.locals.fiveRandomTags = await getFiveRandom();
+    res.locals.scripts = {};
+    res.locals.scripts.custom = [];
     return next();
   });
 
