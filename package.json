@@ -36,7 +36,7 @@
     "joi": "^14.3.1",
     "joi-objectid": "^2.0.0",
     "lodash": "^4.17.15",
-    "log4js": "^4.3.1",
+    "log4js": "^6.4.0",
     "markdown": "^0.5.0",
     "memorystore": "^1.6.1",
     "method-override": "^3.0.0",
