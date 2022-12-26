@@ -1,12 +1,7 @@
-/* eslint-disable prefer-template */
-const connectUrl = [
-  process.env.DB_USER
-    ? process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@'
-    : '',
-  process.env.IP + ':27017',
-  process.env.NODE_ENV === 'test' ? '/test' : '/' + process.env.DB,
-].join('');
-/* eslint-enable prefer-template */
+const connectUrl = process.env.DB_CONNECTION_URL;
+if (!connectUrl) {
+  throw new Error('DB connection url is empty!');
+}
 
 const loggerLevel = process.env.NODE_ENV === 'production'
   ? 'error'
