@@ -98,7 +98,6 @@ const validateId = (idParamName) => {
   };
 };
 
-
 const validateArticleSlugs = (slugs) => {
   const { error } = Joi.validate(slugs, articleSlugsSchema);
   return { error };
@@ -220,7 +219,6 @@ const validateErrorBody = (req, res, next) => {
   req.validatedBody = value;
   return next();
 };
-
 
 module.exports = {
   validateId,
