@@ -3,7 +3,7 @@ require('dotenv').config();
 const http = require('http');
 
 const app = require('../app');
-const logger = require('../utils/logger');
+const logger = require('../app/utils/logger');
 
 if (process.env.NODE_ENV !== 'test') {
   logger.info(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
