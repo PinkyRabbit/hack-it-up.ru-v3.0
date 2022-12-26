@@ -1,29 +1,21 @@
 {
   "name": "hack-it-up",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
+  "engines": {
+    "node": ">=18.12.1"
+  },
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
     "nodemon": "NODE_ENV=development nodemon ./bin/www",
     "vue": "NODE_ENV=development VUE=development nodemon ./bin/www",
     "lint": "node_modules/.bin/eslint ./app/**/*.js",
-    "seed": "NODE_ENV=development node ./db/init"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "ignore": [],
-    "linters": {
-      "./app/**/*.js": "eslint"
-    },
-    "relative": true
+    "seed": "NODE_ENV=development node ./db/init",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "@log4js-node/smtp": "^1.1.0",
-    "bcrypt": "^3.0.6",
+    "@log4js-node/smtp": "^2.0.8",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
@@ -36,20 +28,20 @@
     "joi": "^14.3.1",
     "joi-objectid": "^2.0.0",
     "lodash": "^4.17.15",
-    "log4js": "^4.3.1",
+    "log4js": "^6.7.1",
     "markdown": "^0.5.0",
     "memorystore": "^1.6.1",
     "method-override": "^3.0.0",
     "moment": "^2.24.0",
     "monk": "^7.0.0",
     "morgan": "^1.9.1",
-    "multer": "^1.4.1",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.2.1",
-    "passport": "^0.4.0",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
-    "sharp": "^0.23.0",
+    "sharp": "^0.31.3",
     "transliteration.cyr": "^1.0.5",
     "twig": "^1.13.3",
     "twitter": "^1.7.1",
@@ -60,10 +52,10 @@
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "husky": "^2.4.1",
-    "lint-staged": "^8.2.1",
-    "mocha": "^6.2.0",
-    "nodemon": "^1.19.4",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
     "supertest": "^4.0.2"
   }
 }

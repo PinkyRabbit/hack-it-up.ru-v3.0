@@ -1,12 +1,12 @@
 require('dotenv').config();
 
-const bcrypt   = require('bcrypt');
+const bcrypt   = require('bcryptjs');
 
-const { User } = require('../../db');
+const { User } = require('..');
 const logger   = require('../../utils/logger');
 
 bcrypt.hash(process.env.ADMIN_PASSWORD, 10, (err, hash) => {
-  if (err) return logger.error(err);
+  if (err) { return logger.error(err); }
   const SA = {
     email: process.env.ADMIN_EMAIL,
     password: hash,

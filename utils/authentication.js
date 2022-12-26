@@ -1,8 +1,8 @@
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt        = require('bcrypt');
+const bcrypt        = require('bcryptjs');
 
-const createError = require('../utils/error');
+const createError = require('./error');
 const { User } = require('../db');
 
 const ENV = process.env.NODE_ENV;
@@ -35,7 +35,7 @@ const init = () => {
 
           return done(null, user);
         });
-    }
+    },
   ));
 };
 
