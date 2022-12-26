@@ -5,7 +5,7 @@ const {
 } = require('../db/post');
 const { createSlug } = require('../utils/helpers');
 
-const getAlltags = async () => {
+const getAllTags = async () => {
   const tags = await Tag.getAll();
   return tags;
 };
@@ -25,7 +25,7 @@ const createTag = async (tag) => {
 
 const updateTag = async (_id, name) => {
   const slug = createSlug(name);
-  const existsTagWithSlug = await Tag.findExising(_id, slug);
+  const existsTagWithSlug = await Tag.findExisting(_id, slug);
   if (existsTagWithSlug) {
     return { error: `Возможно нам нужен тег "${existsTagWithSlug.name}"?` };
   }
@@ -48,7 +48,7 @@ const getFiveRandom = async () => {
 };
 
 module.exports = {
-  getAlltags,
+  getAllTags,
   createTag,
   updateTag,
   deleteTag,

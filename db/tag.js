@@ -11,7 +11,7 @@ const TagQuery = {
 
   getAllTags: () => Tag.find({}),
 
-  findExising: (_id, slug) => Tag.findOne({
+  findExisting: (_id, slug) => Tag.findOne({
     _id: { $ne: _id },
     slug,
   }),

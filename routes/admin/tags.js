@@ -15,7 +15,7 @@ adminTagsRouter
   .get('/:tagId/delete', validateId('tagId'), deleteTag);
 
 async function tagsJSON(req, res) {
-  const tags = await tagsController.getAlltags();
+  const tags = await tagsController.getAllTags();
   return res.json(tags);
 }
 

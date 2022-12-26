@@ -4,7 +4,7 @@ const unstableRoutes = require('./unstable');
 const errorHandler = require('../services/errors');
 const createError = require('../utils/error');
 const { reservedRoutes } = require('./validator.config');
-const globalVariables = require('../middlewares/globalVariables');
+const globalVariables = require('../middleware/globalVariables');
 
 const unstablePath = new RegExp(`/((?!${reservedRoutes.join('|')}).)*`);
 

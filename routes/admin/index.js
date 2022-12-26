@@ -7,7 +7,7 @@ const adminTagsRoute = require('./tags');
 const adminCommentRoute = require('./comment');
 const { isAuthenticated } = require('../../utils/authentication');
 const { generator } = require('../../utils/helpers');
-const { csrfProtection } = require('../../middlewares/globalVariables');
+const { csrfProtection } = require('../../middleware/globalVariables');
 const {
   getUnpublished,
   findByCommentsIdArray,
@@ -38,7 +38,7 @@ function addSeoAdmin(req, res, next) {
   res.locals.description = 'Админка';
   res.locals.h1 = 'Админка';
   res.locals.keywords = 'Админка';
-  res.locals.postimage = '/images/standart/admin.jpg';
+  res.locals.postimage = '/images/base/admin.jpg';
 
   return next();
 }

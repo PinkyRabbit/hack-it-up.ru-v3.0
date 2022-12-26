@@ -17,7 +17,7 @@ const updateCategory = async (categoryId, update) => {
   const slug = createSlug(update.name);
   const otherCategory = await Categories.pickOtherCategoryWithSameSlug(categoryId, slug);
   if (otherCategory) {
-    return { error: 'Категория с таким слагом уже существует' };
+    return { error: 'Категория с таким префиксом уже существует' };
   }
 
   const category = await Categories.update(categoryId, update);

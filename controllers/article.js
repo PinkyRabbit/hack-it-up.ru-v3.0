@@ -38,7 +38,7 @@ const getById = async (_id) => {
   return post;
 };
 
-const getArcticleWithRelations = async (_id) => {
+const getArticleWithRelations = async (_id) => {
   const post = await Posts.getOneByIdWithRelations(_id);
   return post;
 };
@@ -73,13 +73,13 @@ const getNews = async ({ page = 1 }) => {
     title: 'Главная',
     h1: 'Hello world!',
     keywords: 'developer, примеры, nodejs, учить',
-    postimage: '/images/standart/main.jpg',
+    postimage: '/images/base/main.jpg',
     description: 'Этот блог родился, когда я делал первые шаги в NodeJS. В нём я публикую свои мысли и заметки про программирование и лучше писать код.',
   };
   if (page !== 1) {
     seo.title = `Блог, страница ${page}`;
-    seo.h1 = `Лента. Cтраница ${page}`;
-    seo.description = `Cтраница ${page}. ${seo.description}`;
+    seo.h1 = `Лента. Страница ${page}`;
+    seo.description = `Страница ${page}. ${seo.description}`;
   }
 
   return { news, pagination, seo };
@@ -94,13 +94,13 @@ const getCategoryNews = async (slug, { page = 1 }) => {
       title: `Раздел ${category.name}`,
       h1: category.name,
       keywords: category.keywords || '',
-      postimage: '/images/standart/main.jpg',
+      postimage: '/images/base/main.jpg',
       description: category.description || '',
     };
     if (page !== 1) {
       seo.title = `${seo.title}, страница ${page}`;
-      seo.h1 = `${seo.h1}. Cтраница ${page}`;
-      seo.description = `Cтраница ${page}. ${seo.description}`;
+      seo.h1 = `${seo.h1}. Страница ${page}`;
+      seo.description = `Страница ${page}. ${seo.description}`;
     }
   }
 
@@ -117,13 +117,13 @@ const getTagNews = async (slug, { page = 1 }) => {
       title: tag.name,
       h1: `Про ${tag.name}.`,
       keywords: tag.name,
-      postimage: '/images/standart/main.jpg',
+      postimage: '/images/base/main.jpg',
       description: `Это раздел про ${tag.name}.` || '',
     };
     if (page !== 1) {
       seo.title = `${seo.title}, страница ${page}`;
-      seo.h1 = `${seo.h1}. Cтраница ${page}`;
-      seo.description = `${seo.description} Cтраница ${page}.`;
+      seo.h1 = `${seo.h1}. Страница ${page}`;
+      seo.description = `${seo.description} Страница ${page}.`;
     }
   }
 
@@ -151,7 +151,7 @@ module.exports = {
   getById,
   updateImage,
   updateArticle,
-  getArcticleWithRelations,
+  getArticleWithRelations,
   publish,
   makeUnpublished,
   getNews,
